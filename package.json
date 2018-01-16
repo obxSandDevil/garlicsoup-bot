@@ -18,6 +18,7 @@
   "homepage": "https://github.com/meric426/garlicsoup-bot#readme",
   "dependencies": {
     "discord.js": "^11.3.0",
+    "request": "^2.83.0",
     "winston": "^2.4.0"
   }
 }
