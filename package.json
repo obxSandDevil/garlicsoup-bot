@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/meric426/garlicsoup-bot/issues"
   },
-  "homepage": "https://github.com/meric426/garlicsoup-bot#readme"
+  "homepage": "https://github.com/meric426/garlicsoup-bot#readme",
+  "dependencies": {
+    "discord.js": "^11.3.0"
+  }
 }
