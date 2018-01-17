@@ -1,28 +1,28 @@
-var Discord = require('discord.js');
-var auth = require('./auth.json');
-var logger = require('winston');
-var request = require('request');
-var client = new Discord.Client();
+const Discord = require('discord.js');
+const auth = require('./auth.json');
+const logger = require('winston');
+const request = require('request');
+const client = new Discord.Client();
 
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, {
-  colorize: true
+  colorize: true,
 });
 
 logger.level = 'debug';
 
-var update_hashrate = function(){
+function updateHashrate() {
   request({
     url: "https://pool.garlicsoup.xyz/api/stats",
     json: true,
-  }, function(err, response, data){
+  }, function(err, response, data) {
     if (err) logger.error(err.message);
 
-    if (data){
-      hashrate_string = data.pools.garlicoin.hashrateString +"/s";
+    if (data) {
+      const hashRateString = `${data.pools.garlicoin.hashrateString}/s`;
 
-      logger.info("setting hash rate to "+ hashrate_string);
-      client.user.setPresence({game: {name: hashrate_string, type: 0}});
+      logger.info(`setting hash rate to ${hashRateString}`);
+      client.user.setPresence({ game: { name: hashRateString, type: 0 }});
     }
   });
 }
@@ -30,11 +30,9 @@ var update_hashrate = function(){
 client.on('ready', function(){
   logger.info('Logged in as: '+ client.user.username +' - ('+ client.user.id +')');
 
-  update_hashrate();
+  updateHashrate();
 
-  update_interval = setInterval(function(){
-    update_hashrate();
-  }, 60 * 1000);
+  setInterval(updateHashrate, 60 * 1000);
 });
 
 client.login(auth.token);
