@@ -25,6 +25,7 @@ function updateHashrate() {
       client.user.setPresence({ game: { name: hashRateString, type: 0 }});
     } else {
       logger.info('unable to fetch hash rate of the pool. Is it online?');
+      client.user.setPresence({ game: { name: "preparing for main net", type: 0 }});
     }
   });
 }
