@@ -18,11 +18,13 @@ function updateHashrate() {
   }, function(err, response, data) {
     if (err) logger.error(err.message);
 
-    if (data) {
+    if (data && data.pools.garlicoin) {
       const hashRateString = `${data.pools.garlicoin.hashrateString}/s`;
 
       logger.info(`setting hash rate to ${hashRateString}`);
       client.user.setPresence({ game: { name: hashRateString, type: 0 }});
+    } else {
+      logger.info('unable to fetch hash rate of the pool. Is it online?');
     }
   });
 }
