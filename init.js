@@ -13,7 +13,7 @@ logger.level = 'debug';
 
 function updateHashrate() {
   request({
-    url: "https://pool.garlicsoup.xyz/api/stats",
+    url: "http://garliclegends.xyz/api/stats",
     json: true,
   }, function(err, response, data) {
     if (err) logger.error(err.message);
